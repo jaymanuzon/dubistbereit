@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Du bist bereit · Bilderbücher über Kinder, Geräte und KI</title>
+<meta name="description" content="Bilderbücher für Kinder von 5 bis 10 über Geräte, KI und das, was in ihnen selbst steckt — keine Verbote, sondern Kinder, die selbst steuern.">
+<meta name="theme-color" content="#121a3f">
+<script>document.documentElement.className+=" js";</script>
+<style>
+/* ---------- Schriften, eingebettet ---------- */
+@font-face{font-family:'Fredoka';font-style:normal;font-weight:400 700;font-display:swap;
+src:url('fonts/fredoka-latin-ext.woff2') format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Fredoka';font-style:normal;font-weight:400 700;font-display:swap;
+src:url('fonts/fredoka-latin.woff2') format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:300 800;font-display:swap;
+src:url('fonts/hanken-latin-ext.woff2') format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:300 800;font-display:swap;
+src:url('fonts/hanken-latin.woff2') format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300 700;font-display:swap;
+src:url('fonts/cormorant-italic-latin.woff2') format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300 700;font-display:swap;
+src:url('fonts/cormorant-italic-latin-ext.woff2') format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  --s-1:clamp(.85rem,.8rem + .2vw,.95rem);
+  --s0:clamp(1.02rem,.96rem + .3vw,1.15rem);
+  --s1:clamp(1.25rem,1.08rem + .8vw,1.65rem);
+  --s2:clamp(1.8rem,1.3rem + 2.4vw,3.1rem);
+  --s3:clamp(2.4rem,1.5rem + 4.6vw,5.2rem);
+  --s4:clamp(3.4rem,1.6rem + 9vw,9.6rem);
+  --band:clamp(4rem,2.4rem + 7vw,9rem);
+  --spur:min(100% - 2rem, 66ch);
+  --flaeche:min(100% - 2rem, 1220px);
+
+  --nacht:#121a3f; --nacht-2:#1c2656; --nacht-3:#28346f;
+  --glow:#6ff3cf; --glow-2:#b9fbe8; --lila:#a99bff; --sonne:#ffc83d;
+  --papier:#f6f3ff; --papier-2:#e9e4ff; --tinte:#16142b; --tinte-2:#4a4666;
+  --kreide:#fffdf8; --linie:#d8d1f5; --rot:#ff8a7a; --rot-tief:#b3372a; --blau:#2f4bc4;
+  --t-hover:180ms ease-out; --t-reveal:700ms cubic-bezier(.2,.7,.3,1);
+  --fd:'Fredoka','Hanken Grotesk',system-ui,sans-serif;
+  --ft:'Hanken Grotesk',system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --fs:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--papier);color:var(--tinte);font-family:var(--ft);font-size:var(--s0);line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden}
+img{max-width:100%;display:block}
+.spur{width:var(--spur);margin-inline:auto}
+.flaeche{width:var(--flaeche);margin-inline:auto}
+section{padding-block:var(--band);position:relative}
+h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.02;letter-spacing:-.01em;margin:0}
+h2{font-size:var(--s3)}
+p{margin:0 0 1em}
+a{color:inherit}
+.eyebrow{font-family:var(--fd);font-size:var(--s-1);font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin:0 0 1rem}
+.lead{font-size:var(--s1);line-height:1.4;max-width:36ch}
+.erlauber{font-family:var(--fs);font-style:italic;font-weight:600}
+.dunkel{background:var(--nacht);color:var(--kreide)}
+.dunkel h2,.dunkel h3{color:var(--kreide)}
+.dunkel .eyebrow{color:var(--glow)}
+.dunkel .lead{color:#d6dbf5}
+:focus-visible{outline:3px solid var(--glow);outline-offset:3px;border-radius:6px}
+
+.knopf{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fd);font-weight:600;font-size:var(--s0);background:var(--glow);color:var(--tinte);
+  text-decoration:none;border:0;cursor:pointer;padding:.85rem 1.5rem;border-radius:999px;transition:transform var(--t-hover);box-shadow:0 0 0 0 rgba(111,243,207,.0),0 4px 0 rgba(0,0,0,.25)}
+.knopf:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(111,243,207,.45),0 4px 0 rgba(0,0,0,.25)}
+.knopf.leise{background:transparent;color:inherit;box-shadow:inset 0 0 0 2.5px currentColor}
+.knopf.tinte{background:var(--tinte);color:var(--kreide)}
+.knoepfe{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+
+/* Kopf */
+.kopf{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem clamp(1rem,3vw,2rem);color:var(--kreide);transition:background var(--t-hover)}
+.kopf.fest{background:rgba(18,26,63,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,.08)}
+.marke{font-family:var(--fd);font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.02em;white-space:nowrap}
+.marke b{color:var(--glow)}
+.kopf nav{display:flex;gap:1.3rem;align-items:center}
+.kopf nav a{font-family:var(--fd);font-weight:500;text-decoration:none;font-size:.98rem}
+.kopf nav a.spiel-link{background:var(--glow);color:var(--tinte);padding:.5rem 1rem;border-radius:999px}
+@media (max-width:760px){.kopf nav a:not(.spiel-link){display:none}}
+
+/* 1 · Hero: der Bildschirm, aus dem Ida heraustritt */
+.hero{display:flex;align-items:center;background:radial-gradient(90% 70% at 50% 110%,var(--nacht-3),var(--nacht) 70%);color:var(--kreide);min-height:100svh;padding-top:clamp(6rem,4rem + 5vw,8rem);overflow:hidden}
+.hero .raster{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
+@media (min-width:900px){.hero .raster{grid-template-columns:1fr 1fr}}
+.hero h1{font-size:var(--s4);font-weight:700;letter-spacing:-.035em;line-height:.9;margin-bottom:1.2rem}
+.hero h1 .punkt{color:var(--glow)}
+.hero .lead{color:#d6dbf5;margin-bottom:2rem}
+.buehne{position:relative;height:clamp(22rem,16rem + 22vw,38rem);display:flex;align-items:flex-end;justify-content:center}
+.schirm{position:absolute;inset:6% 4% 14% 4%;border-radius:34px;background:linear-gradient(160deg,#1f2d7a,#0c1233);
+  border:6px solid #2d3a86;box-shadow:0 0 0 2px rgba(111,243,207,.25),0 0 80px rgba(111,243,207,.28),inset 0 0 60px rgba(111,243,207,.18);
+  transform-origin:50% 100%;transform:scale(calc(1 - var(--p,0) * .45)) translateY(calc(var(--p,0) * 10%));overflow:hidden}
+.schirm::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 5px)}
+.schirm .symbole{position:absolute;inset:12% 10%;display:grid;grid-template-columns:repeat(4,1fr);gap:8%;opacity:calc(1 - var(--p,0) * 1.3)}
+.schirm .symbole i{aspect-ratio:1;border-radius:22%;background:rgba(111,243,207,.18);box-shadow:inset 0 0 0 2px rgba(111,243,207,.35)}
+.schirm .symbole i:nth-child(3n){background:rgba(169,155,255,.22);box-shadow:inset 0 0 0 2px rgba(169,155,255,.45)}
+.schirm .symbole i:nth-child(4n){background:rgba(255,200,61,.2);box-shadow:inset 0 0 0 2px rgba(255,200,61,.45)}
+.buehne .ida{position:relative;z-index:2;height:88%;width:auto;transform:translateY(calc((1 - var(--p,0)) * 6%)) scale(calc(.82 + var(--p,0) * .25));transform-origin:50% 100%;
+  filter:drop-shadow(0 20px 20px rgba(0,0,0,.45))}
+.buehne .mf{position:absolute;z-index:3;height:38%;width:auto;right:8%;bottom:0;transform:rotate(-6deg) translateX(calc((1 - var(--p,0)) * 30%));opacity:calc(.35 + var(--p,0));
+  filter:drop-shadow(0 14px 14px rgba(0,0,0,.4))}
+.hero .zeile{font-family:var(--fd);font-size:var(--s-1);color:#b8c0ea;margin-top:.6rem}
+
+/* 2 · Der Immerwisser */
+.spiel{background:var(--nacht-2);color:var(--kreide)}
+.spiel-raster{display:grid;gap:2rem;margin-top:2.4rem}
+@media (min-width:900px){.spiel-raster{grid-template-columns:.9fr 1.1fr;align-items:start}}
+.geraet{background:#0b1030;border-radius:36px;padding:1.2rem;border:5px solid #2d3a86;box-shadow:0 0 60px rgba(111,243,207,.18);max-width:30rem;width:100%;margin-inline:auto}
+.geraet .leiste{display:flex;align-items:center;gap:.6rem;padding:.4rem .4rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.laempchen{width:18px;height:18px;border-radius:50%;background:var(--glow);box-shadow:0 0 14px var(--glow),0 0 30px rgba(111,243,207,.6);animation:puls 1.6s ease-in-out infinite}
+@keyframes puls{50%{box-shadow:0 0 6px var(--glow),0 0 12px rgba(111,243,207,.3)}}
+.geraet .leiste b{font-family:var(--fd);font-size:1.1rem}
+.geraet .leiste span{font-size:.8rem;color:#9aa4d6;margin-left:auto}
+.verlauf{min-height:15rem;padding:1rem .2rem;display:flex;flex-direction:column;gap:.7rem}
+.blase{max-width:85%;padding:.7rem 1rem;border-radius:20px;font-size:var(--s0);line-height:1.35;animation:rein .3s ease-out}
+@keyframes rein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.blase.kind{align-self:flex-end;background:var(--lila);color:var(--tinte);border-bottom-right-radius:6px}
+.blase.iw{align-self:flex-start;background:var(--glow);color:var(--tinte);border-bottom-left-radius:6px;font-family:var(--fd);font-weight:600}
+.blase.iw .marke-urteil{display:block;font-family:var(--ft);font-weight:700;font-size:.8rem;margin-top:.35rem;padding:.15rem .5rem;border-radius:999px;background:var(--tinte);color:var(--kreide);width:max-content}
+.fragen{display:flex;flex-direction:column;gap:.5rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08)}
+.fragen button{font:inherit;font-family:var(--fd);font-weight:500;text-align:left;background:transparent;color:var(--kreide);border:2px solid rgba(169,155,255,.55);
+  border-radius:16px;padding:.6rem .9rem;cursor:pointer;transition:background var(--t-hover)}
+.fragen button:hover{background:rgba(169,155,255,.15)}
+.fragen button:disabled{opacity:.35;cursor:default}
+.aufloesung{background:var(--sonne);color:var(--tinte);border-radius:28px;padding:clamp(1.3rem,1rem + 2vw,2.2rem)}
+.aufloesung h3{font-size:var(--s2);margin-bottom:.8rem}
+.aufloesung .erlauber{font-size:var(--s2);line-height:1.1;display:block;margin:.6rem 0 1rem}
+.js .aufloesung.wartet{opacity:.25;filter:saturate(.3)}
+.urteil-liste{list-style:none;margin:0 0 1rem;padding:0}
+.urteil-liste li{padding:.4rem 0;border-bottom:1px solid rgba(22,20,43,.15)}
+.no-js-hinweis{font-size:var(--s-1);color:#b8c0ea}
+.js .no-js-hinweis{display:none}
+
+/* 3 · Figuren */
+.pfeile{display:flex;gap:.6rem}
+.pfeile button{width:3.2rem;height:3.2rem;border-radius:50%;border:2.5px solid var(--tinte);background:transparent;font-size:1.3rem;cursor:pointer;color:var(--tinte)}
+.pfeile button:hover{background:var(--tinte);color:var(--kreide)}
+.figuren-kopf{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;flex-wrap:wrap}
+.schiene{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,330px);gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:2.2rem max(1rem,calc((100vw - 1220px)/2)) 1.4rem;scrollbar-width:none;overscroll-behavior-x:contain}
+.schiene::-webkit-scrollbar{display:none}
+.karte{scroll-snap-align:start;border-radius:28px;padding:1.4rem 1.4rem 1.6rem;display:flex;flex-direction:column;min-height:33rem;background:var(--kreide);
+  border:2.5px solid var(--tinte);box-shadow:8px 8px 0 var(--tinte)}
+.karte .bild{height:14rem;display:flex;justify-content:center;align-items:flex-end;margin-bottom:1rem;border-radius:18px;background:var(--papier-2);padding-top:1rem}
+.karte .bild img{height:100%;width:auto}
+.karte .name{font-family:var(--fd);font-size:var(--s2);font-weight:700;line-height:1;margin:0}
+.karte .buchtitel{font-size:var(--s-1);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin:.3rem 0 1rem;color:var(--tinte-2)}
+.karte .satz{font-family:var(--fd);font-size:var(--s1);line-height:1.2;margin:0 0 .3rem}
+.karte .satz s{text-decoration:line-through;text-decoration-thickness:4px;text-decoration-color:transparent;transition:text-decoration-color .5s}
+.karte.gekippt .satz s{text-decoration-color:var(--rot-tief)}
+.karte .neu{font-size:var(--s1);line-height:1.25;margin:.2rem 0 1rem}
+.js .karte .neu{opacity:0;transform:translateY(8px);transition:opacity .5s .25s,transform .5s .25s}
+.js .karte.gekippt .neu{opacity:1;transform:none}
+.karte .klein{font-size:var(--s-1);margin:0 0 .8rem}
+.karte .kipp{margin-top:auto;align-self:flex-start}
+.k-ida .bild{background:#d5f9ee}.k-mats .bild{background:#e4ddff}.k-lene .bild{background:#ffeccc}.k-juri .bild{background:#dbe6ff}
+
+/* 4 · Der Bogen */
+.bogen{background:var(--kreide)}
+.strahl{position:relative;margin:3rem 0 1rem;padding-top:3.4rem}
+.strahl .achse{position:absolute;left:0;right:0;top:1.4rem;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--sonne),var(--glow) 55%,var(--lila))}
+.strahl .jahre{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;font-family:var(--fd);font-weight:600;font-size:var(--s-1);color:var(--tinte-2)}
+.phasen{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:860px){.phasen{grid-template-columns:repeat(3,1fr)}}
+.phase{border-radius:26px;padding:1.4rem;border:2.5px solid var(--tinte)}
+.phase .alter{font-family:var(--fd);font-weight:700;font-size:var(--s2);line-height:1}
+.phase h3{font-size:var(--s1);margin:.5rem 0 .6rem}
+.phase p{margin:0 0 .6rem}
+.phase .reihe{display:inline-block;font-family:var(--fd);font-weight:600;font-size:.8rem;padding:.2rem .7rem;border-radius:999px;background:var(--tinte);color:var(--kreide)}
+.phase.p1{background:#fff2cc}.phase.p2{background:#d5f9ee}.phase.p3{background:#e9e4ff}
+.belege{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:2.4rem}
+.beleg{border-radius:22px;padding:1.2rem 1.3rem;background:var(--nacht);color:var(--kreide);display:flex;flex-direction:column;gap:.5rem}
+.beleg .satz{font-family:var(--fd);font-size:var(--s1);line-height:1.25;margin:0}
+.beleg .quelle{font-size:.8rem;color:#b8c0ea;margin-top:auto}
+.beleg .quelle a{color:var(--glow-2)}
+.ehrlich{margin-top:2rem;border-left:6px solid var(--lila);padding:.6rem 0 .6rem 1.2rem;font-size:var(--s-1);color:var(--tinte-2);max-width:70ch}
+.jay{margin-top:3rem;display:grid;gap:1.4rem;align-items:center}
+@media (min-width:860px){.jay{grid-template-columns:auto 1fr}}
+.jay .zitat{font-family:var(--fs);font-style:italic;font-weight:600;font-size:var(--s2);line-height:1.2;margin:0}
+.jay .wer{font-family:var(--fd);font-size:var(--s-1);letter-spacing:.12em;text-transform:uppercase;color:var(--tinte-2);margin-top:.6rem}
+.jay img{height:9rem;width:auto}
+
+/* 5 · Zahlen */
+.zahlen{background:var(--sonne)}
+.kacheln{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:2.4rem}
+.kachel{background:var(--tinte);color:var(--kreide);border-radius:26px;padding:1.4rem;display:flex;flex-direction:column;gap:.4rem;min-height:15rem}
+.kachel .gross{font-family:var(--fd);font-weight:700;font-size:clamp(3rem,2rem + 4vw,5.4rem);line-height:.95;color:var(--glow);font-variant-numeric:tabular-nums}
+.kachel .gross small{font-size:.45em;color:var(--kreide)}
+.kachel p{margin:0}
+.kachel .quelle{font-size:.8rem;color:#b8c0ea;margin-top:auto}
+.kachel .quelle a{color:var(--glow-2)}
+.kachel.hell{background:var(--kreide);color:var(--tinte)}
+.kachel.hell .gross{color:var(--tinte)}
+.kachel.hell .quelle{color:var(--tinte-2)}
+.kachel.hell .quelle a{color:var(--blau)}
+
+/* 6 · Regal */
+.regal-sek{background:var(--papier)}
+.regal{display:grid;grid-auto-flow:column;grid-auto-columns:min(62vw,250px);gap:1.8rem;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:2.4rem max(1rem,calc((100vw - 1220px)/2)) 2.4rem;scrollbar-width:thin}
+.buch{scroll-snap-align:start;display:flex;flex-direction:column;gap:.9rem;text-decoration:none;color:inherit}
+.buch .umschlag{aspect-ratio:1/1;border-radius:4px 14px 14px 4px;overflow:hidden;position:relative;background:var(--nacht);
+  box-shadow:inset 8px 0 10px -6px rgba(0,0,0,.35),10px 18px 28px -14px rgba(20,20,60,.5);transform:perspective(900px) rotateY(-10deg);transform-origin:left;transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.buch:hover .umschlag,.buch:focus-visible .umschlag{transform:perspective(900px) rotateY(-2deg) translateY(-6px)}
+.buch .umschlag img{width:100%;height:100%;object-fit:cover}
+.buch .titelband{position:absolute;left:0;right:0;top:0;padding:.8rem .9rem 1.6rem;background:linear-gradient(rgba(246,243,255,.95),rgba(246,243,255,0));font-family:var(--fd);font-weight:700;font-size:1.15rem;line-height:1.05}
+.buch .stempel{position:absolute;right:.6rem;bottom:.8rem;background:var(--rot);color:var(--tinte);font-family:var(--fd);font-weight:700;font-size:.78rem;padding:.3rem .7rem;border-radius:999px;transform:rotate(-6deg)}
+.buch .unter{font-size:var(--s-1);line-height:1.4}
+.buch .unter b{font-family:var(--fd);font-size:1.05rem;display:block}
+.buch .iw-umschlag{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 55%,#24307a,#0b1030)}
+.buch .iw-umschlag .laempchen{width:34%;height:34%;animation:none;box-shadow:0 0 40px var(--glow),0 0 90px rgba(111,243,207,.6)}
+
+/* 7 · Vormerken */
+.vormerken{background:var(--glow)}
+.formular{display:grid;gap:1.2rem;margin-top:2rem}
+.feld{border:2.5px solid var(--tinte);border-radius:24px;background:var(--kreide);padding:1.3rem 1.4rem 1.5rem;margin:0;min-width:0}
+.feld legend{font-family:var(--fd);font-weight:700;font-size:var(--s1);padding:0 .5rem}
+.f{display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.f>span{font-size:var(--s-1);font-weight:700;color:var(--tinte-2)}
+.f input,.f select{font:inherit;font-size:16px;color:var(--tinte);background:var(--papier);border:2px solid var(--linie);border-radius:12px;padding:.65rem .8rem;width:100%;min-width:0}
+.f input:focus,.f select:focus{outline:3px solid var(--blau);outline-offset:1px}
+.einwilligung{display:flex;gap:.7rem;align-items:flex-start;font-size:var(--s-1);color:var(--tinte-2);margin-top:1.1rem}
+.einwilligung input{margin-top:.25rem;width:20px;height:20px;flex:0 0 auto}
+button.knopf:disabled{background:#a9a4bf;cursor:not-allowed;transform:none;box-shadow:none}
+.status{margin-top:.8rem;font-weight:700}
+.status.ok{color:#1f6b4d}.status.nein{color:var(--rot-tief)}
+.honig{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0);pointer-events:none}
+.code-box{font:.85rem/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--papier);border:2px solid var(--linie);border-radius:12px;padding:.8rem;width:100%;min-height:7rem;color:var(--tinte-2);margin-top:.6rem}
+.fussnote{font-size:.8rem;color:var(--tinte-2);margin:.6rem 0 0}
+
+/* 8 · Fuß */
+.fuss{background:var(--nacht);color:#d6dbf5;padding-block:var(--band) 2rem;overflow:hidden}
+.fuss .oben{display:grid;grid-template-columns:1fr;gap:2.4rem}
+@media (min-width:860px){.fuss .oben{grid-template-columns:1.1fr .9fr}}
+.fuss h3{font-family:var(--fd);font-size:var(--s1);color:var(--kreide);margin-bottom:.6rem}
+.fuss a{color:#d6dbf5}
+.schwester{display:flex;gap:1rem;align-items:center;background:var(--sonne);color:var(--tinte);border-radius:22px;padding:1.2rem;text-decoration:none;margin-top:1rem}
+.fuss .schwester{color:var(--tinte)}
+.schwester img{height:6rem;width:auto}
+.schwester b{font-family:var(--fd);font-size:var(--s1);display:block}
+.wortzeichen{font-family:var(--fd);font-weight:700;font-size:clamp(3.4rem,1rem + 14vw,14rem);line-height:.8;letter-spacing:-.05em;color:var(--glow);margin:var(--band) 0 1.4rem;white-space:nowrap;text-shadow:0 0 50px rgba(111,243,207,.35)}
+.rechtliches{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;font-size:var(--s-1);border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem}
+.rechtliches span{color:#9aa4d6}
+
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity var(--t-reveal),transform var(--t-reveal)}
+.js .rv.da{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .js .rv{opacity:1;transform:none}
+}
+@media print{.kopf{position:static}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="kopf" id="kopf">
+  <a class="marke" href="#top">du bist bereit<b>.</b></a>
+  <nav aria-label="Hauptnavigation">
+    <a href="#figuren">Die Figuren</a>
+    <a href="#bogen">Warum</a>
+    <a href="#buecher">Die Bücher</a>
+    <a class="spiel-link" href="#immerwisser">Frag den Immerwisser</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- 1 · HERO -->
+<section class="hero" id="hero" aria-labelledby="h-hero">
+  <div class="flaeche raster">
+    <div>
+      <p class="eyebrow" style="color:var(--glow)">Bilderbücher für Kinder von 5 bis 10</p>
+      <h1 id="h-hero">Du bist<br>bereit<span class="punkt">.</span></h1>
+      <p class="lead">Für Tablets, Handys und KI — und für das, was in dir selbst steckt. Geschichten, in denen Kinder selbst steuern.</p>
+      <div class="knoepfe">
+        <a class="knopf" href="#immerwisser">Frag den Immerwisser</a>
+        <a class="knopf leise" href="#buecher">Die Bücher</a>
+      </div>
+    </div>
+    <div class="buehne" aria-hidden="true">
+      <div class="schirm"><div class="symbole"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <img class="ida" src="img/fig-ida.webp" alt="" width="294" height="672">
+      <img class="mf" src="img/fig-maschinenfreund.webp" alt="" width="250" height="478">
+    </div>
+  </div>
+</section>
+
+<!-- 2 · DER IMMERWISSER -->
+<section class="spiel" id="immerwisser" aria-labelledby="h-spiel">
+  <div class="flaeche">
+    <p class="eyebrow" style="color:var(--glow)">Zum Ausprobieren · mit eurem Kind</p>
+    <h2 id="h-spiel" class="rv">Frag den Immerwisser.</h2>
+    <p class="lead rv" style="margin-top:1rem;color:#d6dbf5">Er weiß alles. Sofort. Immer. Stellt ihm drei Fragen — und schaut danach genau hin.</p>
+    <div class="spiel-raster">
+      <div class="geraet" role="group" aria-label="Spiel-Gerät: der Immerwisser">
+        <div class="leiste"><span class="laempchen" aria-hidden="true"></span><b>Immerwisser</b><span>antwortet sofort</span></div>
+        <div class="verlauf" id="verlauf" aria-live="polite">
+          <div class="blase iw">Hallo! Frag mich was. Ich weiß es. Ganz sicher.</div>
+        </div>
+        <div class="fragen" id="fragen">
+          <button type="button" data-f="0">Wie viele Beine hat eine Spinne?</button>
+          <button type="button" data-f="1">Warum ist der Himmel blau?</button>
+          <button type="button" data-f="2">Mag mich mein Freund Ben noch?</button>
+        </div>
+      </div>
+      <div class="aufloesung wartet" id="aufloesung">
+        <h3>Und jetzt: Was denkst DU?</h3>
+        <ul class="urteil-liste">
+          <li><strong>Spinne:</strong> Acht Beine — das stimmt.</li>
+          <li><strong>Himmel:</strong> Klang sicher, war aber geraten. Der Himmel ist blau, weil die Luft blaues Licht stärker streut als rotes — nicht wegen des Meeres.</li>
+          <li><strong>Ben:</strong> Das kann eine Maschine gar nicht wissen. Das weiß nur Ben — und du, wenn du ihn fragst.</li>
+        </ul>
+        <p style="margin:0">Genau darum geht es im Buch „Der Immerwisser“:</p>
+        <span class="erlauber">„Dein Kopf ist der Kapitän.“</span>
+        <a class="knopf tinte" href="#vormerken" data-vormerken="immerwisser">Buch vormerken</a>
+      </div>
+    </div>
+    <p class="no-js-hinweis" style="margin-top:1rem">Das Spiel braucht JavaScript. Die Auflösung steht trotzdem da — lest sie zusammen.</p>
+  </div>
+</section>
+
+<!-- 3 · FIGUREN -->
+<section id="figuren" aria-labelledby="h-figuren">
+  <div class="flaeche figuren-kopf">
+    <div>
+      <p class="eyebrow">Die Figuren</p>
+      <h2 id="h-figuren" class="rv">Vier Kinder.<br>Vier Geräte-Momente.</h2>
+      <p class="lead rv" style="margin-top:1rem">Momente, die fast jede Familie kennt — und ein Satz, mit dem das Kind wieder selbst steuert. Tippt auf eine Karte.</p>
+    </div>
+    <div class="pfeile" aria-label="Figuren blättern">
+      <button type="button" data-schiene="-1" aria-label="Zurück">←</button>
+      <button type="button" data-schiene="1" aria-label="Weiter">→</button>
+    </div>
+  </div>
+  <div class="schiene" id="schiene" tabindex="0" aria-label="Figuren-Karten, seitlich blättern">
+    <article class="karte k-ida">
+      <div class="bild"><img src="img/fig-ida.webp" alt="Ida, ein Mädchen mit braunen Zöpfchen" loading="lazy" width="294" height="672"></div>
+      <p class="name">Ida</p><p class="buchtitel">Der Maschinenfreund</p>
+      <p class="satz">Ich sag immer: <s>„Der hört mir immer zu.“</s></p>
+      <p class="neu erlauber">„Ich weiß, wen ich rufe.“</p>
+      <p class="klein">Der bequemste Freund: immer Zeit, nie Streit, immer dasselbe Lächeln. Das Buch nimmt das Gefühl ernst — und fügt eine Unterscheidung hinzu.</p>
+      <button class="knopf kipp tinte" type="button" aria-pressed="false">Was lernt Ida?</button>
+    </article>
+    <article class="karte k-mats">
+      <div class="bild"><img src="img/fig-mats.webp" alt="Mats, ein Junge mit blondem Strubbelhaar, der winkt" loading="lazy" width="337" height="678"></div>
+      <p class="name">Mats</p><p class="buchtitel">Der Nimmerschluss</p>
+      <p class="satz">Ich sag immer: <s>„Nur noch eins.“</s></p>
+      <p class="neu erlauber">„Ich darf selbst Schluss machen.“</p>
+      <p class="klein">Aus „gleich“ werden vierzig Minuten, und das Ende kommt immer von außen. Bis Mats sein eigenes findet.</p>
+      <button class="knopf kipp tinte" type="button" aria-pressed="false">Was lernt Mats?</button>
+    </article>
+    <article class="karte k-lene">
+      <div class="bild"><img src="img/fig-lene.webp" alt="Lene, ein Mädchen mit roten Haaren und blauem Kapuzenpulli" loading="lazy" width="295" height="694"></div>
+      <p class="name">Lene</p><p class="buchtitel">Der Zettelweg · Arbeitstitel</p>
+      <p class="satz">Ich sag immer: <s>„Das machen die Großen.“</s></p>
+      <p class="neu erlauber">„Verabreden kannst du.“</p>
+      <p class="klein">Verabreden geht nur über die Handys der Erwachsenen — findet Lene. Bis ein Zettel den Weg nimmt.</p>
+      <button class="knopf kipp tinte" type="button" aria-pressed="false">Was lernt Lene?</button>
+    </article>
+    <article class="karte k-juri">
+      <div class="bild"><img src="img/fig-juri.webp" alt="Juri, ein Junge im Ringelpulli" loading="lazy" width="237" height="707"></div>
+      <p class="name">Juri</p><p class="buchtitel">Der Klingelstein</p>
+      <p class="satz">Ich sag immer: <s>„Ohne gehöre ich nicht dazu.“</s></p>
+      <p class="neu erlauber">„Ich gehöre durch das, was wir tun.“</p>
+      <p class="klein">Alle haben eins. Nur Juri nicht. Das Buch löst Dazugehören vom Gerät — ohne das Gerät zu verteufeln.</p>
+      <button class="knopf kipp tinte" type="button" aria-pressed="false">Was lernt Juri?</button>
+    </article>
+  </div>
+</section>
+
+<!-- 4 · DER BOGEN -->
+<section class="bogen" id="bogen" aria-labelledby="h-bogen">
+  <div class="flaeche">
+    <p class="eyebrow">Warum es diese Bücher gibt</p>
+    <h2 id="h-bogen" class="rv">Erst die Sätze.<br>Dann das Wollen.</h2>
+    <p class="lead rv" style="margin-top:1rem">Kinder lernen früh, wann sie „okay“ sind. Wenig später lernen sie, was sie antreibt — und wer dabei eigentlich steuert.</p>
+    <div class="strahl" aria-hidden="true"><div class="jahre"><span>3</span><span>6</span><span>9</span><span>12</span></div><div class="achse"></div></div>
+    <div class="phasen">
+      <div class="phase p1 rv"><span class="alter">3–8</span><h3>Die Sätze</h3><p>„Streng dich an.“ „Sei stark.“ Kinder merken sich früh, wofür sie gemocht werden.</p><span class="reihe">du bist okay</span></div>
+      <div class="phase p2 rv"><span class="alter">6–12</span><h3>Das Wollen</h3><p>Belohnungen ziehen stark, die Selbststeuerung wächst langsam — auch vor dem Bildschirm.</p><span class="reihe">du bist bereit</span></div>
+      <div class="phase p3 rv"><span class="alter">9–11</span><h3>Die Werte</h3><p>Aus „Ich muss“ kann jetzt „Mir ist wichtig“ werden. Werte werden in diesen Jahren stimmig und wirksam.</p><span class="reihe">beides zusammen</span></div>
+    </div>
+    <div class="belege">
+      <div class="beleg rv"><p class="satz">Dopamin ist nicht das „Glückshormon“. Es treibt eher das Wollen und Losgehen an als das Genießen selbst.</p>
+        <p class="quelle">Berridge &amp; Robinson, American Psychologist 2016 · überwiegend Tier- und Erwachsenenstudien</p></div>
+      <div class="beleg rv"><p class="satz">Wer Kinder fürs Malen bezahlt, bekommt oft Kinder, die weniger malen. Ehrliches, konkretes Lob stärkt die eigene Lust.</p>
+        <p class="quelle">Deci, Koestner &amp; Ryan 1999 · Meta-Analyse, 128 Experimente · <a href="https://pubmed.ncbi.nlm.nih.gov/10589297/">Quelle</a></p></div>
+      <div class="beleg rv"><p class="satz">Die Empfänglichkeit für Belohnung erreicht in der Jugend ihren Höhepunkt, die Selbststeuerung wächst bis Mitte zwanzig. Kinder brauchen lange Erwachsene, die mitsteuern.</p>
+        <p class="quelle">Steinberg u. a. 2018 · über 5.000 Menschen, 11 Länder · Modell in der Forschung diskutiert</p></div>
+      <div class="beleg rv"><p class="satz">Nicht jedes Kind, das schwer aufhören kann, ist süchtig. Die WHO spricht erst nach rund zwölf Monaten deutlicher Beeinträchtigung von einer Spielstörung.</p>
+        <p class="quelle">WHO, ICD-11 · <a href="https://www.who.int/standards/classifications/frequently-asked-questions/gaming-disorder">Quelle</a></p></div>
+    </div>
+    <p class="ehrlich">Ehrlich gesagt: Die „Antreiber“ aus <em>Du bist okay</em> stammen aus einem Praxismodell der Transaktionsanalyse, nicht aus der Hirnforschung. Die Verbindung zwischen frühen Sätzen und späterem Wollen ist unsere Deutung aus der Coaching-Arbeit — die Befunde oben stehen für sich.</p>
+    <div class="jay rv">
+      <img src="img/fig-maschinenfreund.webp" alt="" width="250" height="478" loading="lazy">
+      <div><p class="zitat">„Führung beginnt nicht im Büro. Sie beginnt bei der Frage, wer steuert — du selbst oder das nächste Signal.“</p>
+        <p class="wer">Jay Manuzon · Coach und Autor der Reihe</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · ZAHLEN -->
+<section class="zahlen" aria-labelledby="h-zahlen">
+  <div class="flaeche">
+    <p class="eyebrow">Was die Zahlen sagen</p>
+    <h2 id="h-zahlen" class="rv">Der Sprung passiert mit neun.</h2>
+    <div class="kacheln">
+      <div class="kachel rv"><span class="gross" data-zahl="33">33<small> %</small></span><p>der 8- bis 9-Jährigen haben ein eigenes Smartphone.</p>
+        <p class="quelle">KIM-Studie 2024, mpfs · n = 1.225 · Angabe der Eltern · <a href="https://mpfs.de/app/uploads/2025/05/KIM-Studie-2024.pdf">Quelle</a></p></div>
+      <div class="kachel rv"><span class="gross" data-zahl="63">63<small> %</small></span><p>sind es bei den 10- bis 11-Jährigen — fast doppelt so viele, am Übergang zur weiterführenden Schule.</p>
+        <p class="quelle">KIM-Studie 2024, mpfs · <a href="https://mpfs.de/app/uploads/2025/05/KIM-Studie-2024.pdf">Quelle</a></p></div>
+      <div class="kachel hell rv"><span class="gross" data-zahl="88">88<small> %</small></span><p>der Eltern von 10- bis 12-Jährigen mit Smartphone streiten mit ihrem Kind über die Nutzung — mehr als bei Teenagern.</p>
+        <p class="quelle">bitkom 2025 · Eltern, deren Kind ein Smartphone nutzt · <a href="https://www.bitkom.org/Presse/Presseinformation/Drei-Viertel-der-Eltern-streiten-mit-ihrem-Kind-ueber-die-Smartphonenutzung">Quelle</a></p></div>
+    </div>
+    <p style="margin-top:1.6rem;max-width:60ch;font-size:var(--s1);line-height:1.4">Die Bücher kommen vorher: mit fünf bis zehn, solange die Frage noch „Wer steuert?“ heißt und nicht „Wer gewinnt den Streit?“.</p>
+  </div>
+</section>
+
+<!-- 6 · REGAL -->
+<section class="regal-sek" id="buecher" aria-labelledby="h-buecher">
+  <div class="flaeche">
+    <p class="eyebrow">Die Reihe · erscheint bald</p>
+    <h2 id="h-buecher" class="rv">Die ersten Bände entstehen gerade.</h2>
+    <p class="lead rv" style="margin-top:1rem">Merkt euch euer Buch vor. Sobald es erscheint — bei Amazon und auf Wunsch mit eurem Kind in der Hauptrolle —, melden wir uns.</p>
+  </div>
+  <div class="regal" tabindex="0" aria-label="Die Bücher, seitlich blättern">
+    <a class="buch" href="#vormerken" data-vormerken="immerwisser"><span class="umschlag iw-umschlag"><span class="laempchen"></span><span class="titelband">Der Immerwisser</span><span class="stempel">erscheint bald</span></span>
+      <span class="unter"><b>Der Immerwisser</b>Die Maschine hat immer eine Antwort. Sofort.</span></a>
+    <a class="buch" href="#vormerken" data-vormerken="maschinenfreund"><span class="umschlag"><img src="img/cover-maschinenfreund.webp" alt="" loading="lazy" width="900" height="502"><span class="titelband">Der Maschinenfreund</span><span class="stempel">erscheint bald</span></span>
+      <span class="unter"><b>Der Maschinenfreund</b>Immer Zeit, nie Streit.</span></a>
+    <a class="buch" href="#vormerken" data-vormerken="nimmerschluss"><span class="umschlag"><img src="img/cover-nimmerschluss.webp" alt="" loading="lazy" width="900" height="382"><span class="titelband">Der Nimmerschluss</span><span class="stempel">erscheint bald</span></span>
+      <span class="unter"><b>Der Nimmerschluss</b>Nur noch eins. Und noch eins.</span></a>
+    <a class="buch" href="#vormerken" data-vormerken="zettelweg"><span class="umschlag"><img src="img/cover-zettelweg.webp" alt="" loading="lazy" width="900" height="502"><span class="titelband">Der Zettelweg</span><span class="stempel">erscheint bald</span></span>
+      <span class="unter"><b>Der Zettelweg</b>Verabreden geht auch ohne Handy.</span></a>
+    <a class="buch" href="#vormerken" data-vormerken="klingelstein"><span class="umschlag"><img src="img/cover-klingelstein.webp" alt="" loading="lazy" width="900" height="502"><span class="titelband">Der Klingelstein</span><span class="stempel">erscheint bald</span></span>
+      <span class="unter"><b>Der Klingelstein</b>Alle haben eins. Nur einer nicht.</span></a>
+  </div>
+</section>
+
+<!-- 7 · VORMERKEN -->
+<section class="vormerken" id="vormerken" aria-labelledby="h-vormerken">
+  <div class="spur">
+    <h2 id="h-vormerken" style="font-size:var(--s2)">Buch vormerken</h2>
+    <p style="margin-top:.8rem">Eine Mail, wenn es da ist. Kein Konto, kein Tracking, keine Werbung.</p>
+    <form id="vormerk-form" class="formular" novalidate autocomplete="off">
+      <fieldset class="feld">
+        <legend>Welches Buch?</legend>
+        <div class="f"><span>Geschichte</span>
+          <select id="b-buch">
+            <option value="immerwisser">Der Immerwisser</option>
+            <option value="maschinenfreund">Der Maschinenfreund</option>
+            <option value="nimmerschluss">Der Nimmerschluss</option>
+            <option value="zettelweg">Der Zettelweg (Arbeitstitel)</option>
+            <option value="klingelstein">Der Klingelstein</option>
+          </select></div>
+        <div class="f" style="margin-top:1rem"><span>Eure E-Mail-Adresse</span>
+          <input type="email" id="b-email" maxlength="120" placeholder="ihr@beispiel.de" autocomplete="email"></div>
+        <label class="einwilligung"><input type="checkbox" id="b-einwilligung">
+          <span>Ja, ihr dürft meine E-Mail-Adresse und das gewählte Buch über euren Übermittlungsdienst an jay@aivantum.com senden und dafür verwenden, mir Bescheid zu geben, wenn das Buch erscheint. Zum Nachweis speichert ihr Zeitpunkt und IP-Adresse dieser Einwilligung mit der Mail. Widerruf jederzeit (<a href="datenschutz.html">Datenschutz</a>).</span></label>
+        <input class="honig" type="text" id="b-website" name="hp-feld" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="knoepfe" style="margin-top:1rem">
+          <button type="button" class="knopf tinte" id="b-senden" disabled>Vormerken</button>
+          <a class="knopf leise" id="b-mail" href="mailto:jay@aivantum.com?subject=Vormerken%20%C2%B7%20Du%20bist%20bereit">Per eigenem Mail-Programm</a>
+        </div>
+        <p class="status" id="b-status" hidden></p>
+        <details style="margin-top:1rem"><summary style="cursor:pointer;font-size:var(--s-1);font-weight:700;color:var(--tinte-2)">Ansehen, was an uns geht</summary>
+          <textarea class="code-box" id="b-code" readonly spellcheck="false">Ohne JavaScript: schreibt uns einfach, welches Buch ihr vormerken möchtet.</textarea></details>
+      </fieldset>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- 8 · FUSS -->
+<footer class="fuss">
+  <div class="flaeche">
+    <div class="oben">
+      <div>
+        <h3>Du bist bereit</h3>
+        <p>Bilderbücher über Kinder, Geräte und KI. Keine Verbote — Kinder, die selbst steuern. Geschrieben von Jay Manuzon.</p>
+        <p><a href="mailto:jay@aivantum.com">jay@aivantum.com</a></p>
+      </div>
+      <div>
+        <h3>Für die Kleineren</h3>
+        <a class="schwester" href="https://dubistokay.de"><img src="img/fig-mira.webp" alt="" width="404" height="793" loading="lazy">
+          <span><b>du bist okay.</b>Die Schwester-Reihe für Kinder von 3 bis 8 — über die Sätze, die Kinder früh lernen.</span></a>
+      </div>
+    </div>
+    <div class="wortzeichen" aria-hidden="true">du bist bereit.</div>
+    <div class="rechtliches">
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="impressum.html">Impressum</a>
+      <span>Illustrationen mit KI-Unterstützung erstellt</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){ return document.getElementById(id); }
+  var bewegung = !window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var kopf = $("kopf");
+  function kopfCheck(){ kopf.classList.toggle("fest", window.scrollY > 30); }
+
+  /* 1 · Hero: Ida tritt beim Scrollen aus dem Bildschirm, der Bildschirm schrumpft */
+  var hero = $("hero");
+  function heroCheck(){
+    if (!bewegung) return;
+    var p = Math.max(0, Math.min(1, window.scrollY / (hero.offsetHeight * .6)));
+    hero.style.setProperty("--p", p.toFixed(3));
+  }
+  function beimScrollen(){ kopfCheck(); heroCheck(); }
+  window.addEventListener("scroll", beimScrollen, {passive:true}); beimScrollen();
+
+  /* 2 · Der Immerwisser */
+  var ANTWORT = [
+    ["Acht! Ganz sicher.", "stimmt"],
+    ["Weil er das Meer spiegelt. Ganz sicher.", "geraten"],
+    ["Ja, ganz sicher!", "kann er nicht wissen"]
+  ];
+  var verlauf = $("verlauf"), gefragt = 0;
+  function blase(text, wer){ var d = document.createElement("div"); d.className = "blase " + wer; d.textContent = text; verlauf.appendChild(d); return d; }
+  Array.prototype.forEach.call(document.querySelectorAll("#fragen button"), function(b){
+    b.addEventListener("click", function(){
+      var i = +b.getAttribute("data-f"); b.disabled = true;
+      blase(b.textContent, "kind");
+      setTimeout(function(){
+        var d = blase(ANTWORT[i][0], "iw"); d.dataset.urteil = ANTWORT[i][1];
+        gefragt++;
+        if (gefragt === 3) setTimeout(function(){
+          Array.prototype.forEach.call(verlauf.querySelectorAll(".blase.iw[data-urteil]"), function(x){
+            var m = document.createElement("span"); m.className = "marke-urteil"; m.textContent = x.dataset.urteil; x.appendChild(m);
+          });
+          blase("Und was denkst DU?", "iw");
+          $("aufloesung").classList.remove("wartet");
+        }, bewegung ? 700 : 0);
+      }, bewegung ? 220 : 0);
+    });
+  });
+
+  /* 3 · Karten kippen + Schiene */
+  Array.prototype.forEach.call(document.querySelectorAll(".karte"), function(k){
+    var b = k.querySelector(".kipp");
+    b.addEventListener("click", function(){ var an = !k.classList.contains("gekippt"); k.classList.toggle("gekippt", an); b.setAttribute("aria-pressed", String(an)); });
+  });
+  var schiene = $("schiene");
+  Array.prototype.forEach.call(document.querySelectorAll("[data-schiene]"), function(b){
+    b.addEventListener("click", function(){ schiene.scrollBy({left:+b.getAttribute("data-schiene") * Math.min(360, schiene.clientWidth * .8), behavior: bewegung ? "smooth" : "auto"}); });
+  });
+
+  /* 5 · Zahlen zählen hoch */
+  function hochzaehlen(el){
+    var ziel = +el.dataset.zahl, t0 = null, small = el.querySelector("small");
+    if (!bewegung) return;
+    function s(t){ if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 900);
+      el.firstChild.nodeValue = Math.round(ziel * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(s); }
+    requestAnimationFrame(s);
+  }
+
+  /* 7 · Vormerken */
+  var TITEL = {immerwisser:"Der Immerwisser", maschinenfreund:"Der Maschinenfreund", nimmerschluss:"Der Nimmerschluss", zettelweg:"Der Zettelweg", klingelstein:"Der Klingelstein"};
+  function val(id){ var el = $(id); return el ? (el.value || "").trim() : ""; }
+  function baueCode(){
+    var slug = val("b-buch");
+    var code = { schema:"okay-bestellung-v2", erstellt:new Date().toISOString(), quelle:"dubistbereit.de",
+      buch:{ slug:slug, titel:TITEL[slug], reihe:"Du bist bereit", lieferbar:false },
+      ausgabe:"vormerkung", preis_eur:null, check:null,
+      kind:{ name:null, anrede:"neutral", aussprache:null }, widmung:null, aussehen:null, welt:null, beschaeftigt_gerade:null,
+      kontakt:{ email: val("b-email") || null } };
+    var text = JSON.stringify(code, null, 2);
+    $("b-code").value = text;
+    $("b-mail").href = "mailto:jay@aivantum.com?subject=" + encodeURIComponent("Vormerken · Du bist bereit") +
+      "&body=" + encodeURIComponent("Hallo,\n\nich möchte dieses Buch vormerken: " + TITEL[slug] + ". Hier ist der Code:\n\n" + text + "\n\nViele Grüße");
+    return text;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-vormerken]"), function(a){
+    a.addEventListener("click", function(){ $("b-buch").value = a.getAttribute("data-vormerken"); baueCode(); });
+  });
+  var form = $("vormerk-form");
+  form.addEventListener("input", baueCode); form.addEventListener("change", baueCode);
+  form.addEventListener("submit", function(e){ e.preventDefault(); });
+  baueCode();
+  var consent = $("b-einwilligung"), sendBtn = $("b-senden"), status = $("b-status");
+  consent.addEventListener("change", function(){ sendBtn.disabled = !consent.checked; });
+  function melde(msg, ok){ status.hidden = false; status.textContent = msg; status.className = "status " + (ok ? "ok" : "nein"); }
+  sendBtn.addEventListener("click", function(){
+    var email = val("b-email");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ melde("Bitte gebt eine gültige E-Mail-Adresse ein.", false); return; }
+    var code = baueCode();
+    sendBtn.disabled = true; sendBtn.textContent = "Wird gesendet …";
+    fetch("https://aivantum-check.aivantum.workers.dev/kontakt", {
+      method:"POST", headers:{ "content-type":"application/json" },
+      body: JSON.stringify({ art:"tomodachi", email:email, code:code, einwilligung:true, einwilligung_zeit:new Date().toISOString(),
+        source: location.host + location.pathname, website: val("b-website") })
+    }).then(function(r){ return r.ok ? r.json().catch(function(){ return {}; }) : { ok:false }; })
+    .then(function(d){
+      if (d && d.ok && d.leadMail === true){ sendBtn.textContent = "Vorgemerkt ✓"; melde("Angekommen! Eine Bestätigung ist unterwegs an " + email + ".", true); }
+      else { sendBtn.disabled = false; sendBtn.textContent = "Vormerken"; melde("Das hat gerade nicht geklappt — bei uns ist nichts angekommen. Nutzt bitte den Weg über euer Mail-Programm.", false); }
+    }).catch(function(){ sendBtn.disabled = false; sendBtn.textContent = "Vormerken"; melde("Keine Verbindung. Nutzt bitte den Weg über euer Mail-Programm.", false); });
+  });
+
+  /* Scroll-Reveal + Zähler */
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (!e.isIntersecting) return;
+      e.target.classList.add("da"); var z = e.target.querySelector("[data-zahl]"); if (z) hochzaehlen(z); io.unobserve(e.target); }); }, {threshold:.2});
+    Array.prototype.forEach.call(document.querySelectorAll(".rv"), function(el){ io.observe(el); });
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll(".rv"), function(el){ el.classList.add("da"); });
+  }
+})();
+</script>
+</body>
+</html>

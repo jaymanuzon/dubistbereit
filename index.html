@@ -256,6 +256,14 @@ button.knopf:disabled{background:#a9a4bf;cursor:not-allowed;transform:none;box-s
   .js .rv{opacity:1;transform:none}
 }
 @media print{.kopf{position:static}.js .rv{opacity:1;transform:none}}
+/* ---------- iPhone: steht am Ende, damit es die Grundregeln wirklich überschreibt ---------- */
+@media (max-width:600px){
+  .schirm .symbole{grid-template-columns:repeat(3,1fr);inset:10% 12%}
+  .schirm .symbole i:nth-child(n+10){display:none}
+  .wortzeichen{font-size:15.5vw}
+  .hero{min-height:auto;padding-bottom:3rem}
+}
+.schiene,.regal{scroll-padding-inline:max(1rem,calc((100vw - 1220px)/2))}
 </style>
 </head>
 <body>
@@ -543,6 +551,7 @@ button.knopf:disabled{background:#a9a4bf;cursor:not-allowed;transform:none;box-s
           });
           blase("Und was denkst DU?", "iw");
           $("aufloesung").classList.remove("wartet");
+          if (window.innerWidth < 900) setTimeout(function(){ $("aufloesung").scrollIntoView({behavior: bewegung ? "smooth" : "auto", block: "start"}); }, bewegung ? 900 : 0);
         }, bewegung ? 700 : 0);
       }, bewegung ? 220 : 0);
     });
